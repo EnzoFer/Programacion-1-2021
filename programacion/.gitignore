@@ -131,6 +131,5 @@ dmypy.json
 /bin
 /include
 .env
-/lib64
+lib64
 pyvenv.cfg
-/.idea
