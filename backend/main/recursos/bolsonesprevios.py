@@ -8,3 +8,9 @@ class BolsonesPrevios(recursos):
         if int(id) in BolsonesPrevios:
             return BolsonesPrevios[int(id)]
         return '', 404
+
+class BolsonPrevio(recursos):
+    def get(self, id):
+        if int(id) in BolsonesPrevios:
+            return BolsonesPrevios[int(id)]
+        return '', 404
