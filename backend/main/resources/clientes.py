@@ -2,8 +2,8 @@ from flask_restful import Resource
 from flask import request
 
 CLIENTES = {
-    1: {'firstname': 'Pedro', 'lastname': 'Marco'},
-    2: {'firstname': 'María', 'lastname': 'Sosa'},
+    1: {'firstname': 'a', 'lastname': 'aa'},
+    2: {'firstname': 'b', 'lastname': 'bb'},
 }
 
 

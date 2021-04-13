@@ -2,9 +2,9 @@ from flask_restful import Resource
 from flask import request
 
 BOLSONESPREVIOS = {
-    1: {'primer bolson previo': 'Bolson1'},
-    2: {'segundo bolson previo': 'Bolson2'},
-    3: {'tercer bolson previo': 'Bolson3'},
+    1: {'bolson previo': 'Bolson1'},
+    2: {'bolson previo': 'Bolson2'},
+    3: {'bolson previo': 'Bolson3'},
 }
 
 
