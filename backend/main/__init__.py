@@ -2,49 +2,29 @@ import os
 from flask import Flask
 from dotenv import load_dotenv
 from flask_restful import Api
-import main.recursos as recursos
+import main.resources as resources
+
 api = Api()
 
+
 def create_app():
-    app = Flask(name)
+    app = Flask(__name__)
     load_dotenv()
-    api.add_recursos(recursos.BolsonesRecursos,'/bolsones')
-    api.add_recursos(recursos.BolsonRecursos,'/bolson/<id>')
-
-    api.add_recursos(recursos.BolsonesPendientesRecursos, '/bolsones-pendientes')
-    api.add_recursos(recursos.BolsonPendientesRecursos, '/bolson-pendientes/<id>')
-
-    api.add_recursos(recursos.BolsonPreviosRecursos, '/bolsones-previos')
-
-    api.add_recursos(recursos.BolsonesVentaRecursos, '/bolsones-venta')
-    api.add_recursos(recursos.BolsonVentaRecursos, '/bolson-venta/<id>')
-
-    api.add_recursos(recursos.ClientesRecursos, '/clientes')
-    api.add_recursos(recursos.ClienteRecursos, '/cliente/<id>')
-
-    api.add_recursos(recursos.ComprasRecursos, '/compras')
-    api.add_recursos(recursos.CompraRecursos, '/compra/<id>')
-
-    api.add_recursos(recursos.ProductosRecursos, '/productos')
-    api.add_recursos(recursos.ProductoRecursos, '/producto/<id>')
-
-    api.add_recursos(recursos.ProveedoresRecursos, '/proveedores')
-    api.add_recursos(recursos.ProveedorRecursos, '/proveedor/<id>')
-
-
-
-
-
-
-
-
-
-    api.init__app(app)
-   return app
-
-
-
-
-
-
-
+    api.add_resource(resources.BolsonesResource, '/bolsones')
+    api.add_resource(resources.BolsonResource, '/bolson/<id>')
+    api.add_resource(resources.BolsonesVentaResource, '/bolsonesventa')
+    api.add_resource(resources.BolsonVentaResource, '/bolsonventa/<id>')
+    api.add_resource(resources.BolsonesPendientesResource, '/bolsonespendientes')
+    api.add_resource(resources.BolsonPendienteResource, '/bolsonpendiente/<id>')
+    api.add_resource(resources.BolsonesPreviosResource, '/bolsonesprevios')
+    api.add_resource(resources.BolsonPrevioResource, '/bolsonprevio/<id>')
+    api.add_resource(resources.ProductosResource, '/productos')
+    api.add_resource(resources.ProductoResource, '/producto/<id>')
+    api.add_resource(resources.ComprasResource, '/compras')
+    api.add_resource(resources.CompraResource, '/compra/<id>')
+    api.add_resource(resources.ClientesResource, '/clientes')
+    api.add_resource(resources.ClienteResource, '/cliente/<id>')
+    api.add_resource(resources.ProveedoresResource, '/proveedores')
+    api.add_resource(resources.ProveedorResource, '/proveedor/<id>')
+    api.init_app(app)
+    return app
