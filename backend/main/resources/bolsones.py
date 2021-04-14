@@ -2,9 +2,9 @@ from flask_restful import Resource
 from flask import request
 
 BOLSONES = {
-    1: {'primer bolson': 'Bolson1'},
-    2: {'segundo bolson': 'Bolson2'},
-    3: {'tercer bolson': 'Bolson3'},
+    1: {'bolson uno': 'Combo1'},
+    2: {'bolson dos': 'Combo2'},
+    3: {'bolson tres': 'Combo3'},
 }
 
 
@@ -18,7 +18,6 @@ class Bolson(Resource):
         if int(id) in BOLSONES:
             return BOLSONES[int(id)]
         return "", 404
-
 
 
 
