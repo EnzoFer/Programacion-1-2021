@@ -1,3 +1,12 @@
+/.idea
+/bin
+/include
+/lib
+/lib64
+/share
+pyvenv.cfg
+.env
+**/__pycache__
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,13 +136,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
 /bin
 /include
-.env
-/lib64
-/lib
-pyvenv.cfg
-/.idea
-/share
-**/__pycache__
