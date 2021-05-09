@@ -1,5 +1,6 @@
 from flask_restful import Resource
 from flask import request
+# from main.models import CompraModel
 
 COMPRAS = {
     1: {'primer compra': 'Primer compra'},
@@ -15,7 +16,7 @@ class Compras(Resource):
         compra = request.get_json()
         id = int(max(COMPRAS.keys())) + 1
         COMPRAS[id] = compra
-        return COMPRAS[int(id)], 201
+        return COMPRAS[id], 201
 
 
 class Compra(Resource):

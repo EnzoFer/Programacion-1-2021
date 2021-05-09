@@ -1,5 +1,6 @@
 from flask_restful import Resource
 from flask import request
+# from main.models import ProductoModel
 
 PRODUCTOS = {
     1: {'primer producto': '1er producto'},
@@ -14,8 +15,8 @@ class Productos(Resource):
     def post(self):
         producto = request.get_json()
         id = int(max(PRODUCTOS.keys())) + 1
-        PRODUCTOS[int(id)] = producto
-        return PRODUCTOS[int(id)], 201
+        PRODUCTOS[id] = producto
+        return PRODUCTOS[id], 201
 
 
 class Producto(Resource):
@@ -33,7 +34,7 @@ class Producto(Resource):
     def put(self, id):
         if int(id) in PRODUCTOS:
             producto = PRODUCTOS[int(id)]
-            date = request.get_json()
-            producto.update(date)
+            data = request.get_json()
+            producto.update(data)
             return producto, 201
         return '', 404

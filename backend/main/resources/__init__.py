@@ -8,9 +8,11 @@ from .bolsonesprevios import BolsonesPrevios as BolsonesPreviosResource
 from .bolsonesprevios import BolsonPrevio as BolsonPrevioResource
 from .productos import Productos as ProductosResource
 from .productos import Producto as ProductoResource
-from .clientes import Clientes as ClientesResource
-from .clientes import Cliente as ClienteResource
 from .compras import Compras as ComprasResource
 from .compras import Compra as CompraResource
+from .clientes import Clientes as ClientesResource
+from .clientes import Cliente as ClienteResource
 from .proveedores import Proveedores as ProveedoresResource
 from .proveedores import Proveedor as ProveedorResource
+from .productobolson import ProductosBolsones as ProductosBolsonesResource
+from .productobolson import ProductoBolson as ProductoBolsonResource
