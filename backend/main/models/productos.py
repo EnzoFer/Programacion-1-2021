@@ -2,6 +2,7 @@ from .. import db
 
 
 class Producto(db.Model):
+
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False)
     proveedorid = db.Column(db.Integer, db.ForeignKey('proveedor.id'), nullable=False)
@@ -12,6 +13,7 @@ class Producto(db.Model):
         return '<Productos: %r  >' % self.nombre
 
     def to_json(self):
+
         productos_json = {
             'id': self.id,
             'nombre': str(self.nombre),

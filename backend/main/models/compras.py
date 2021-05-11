@@ -3,6 +3,7 @@ from datetime import datetime
 
 
 class Compra(db.Model):
+
     id = db.Column(db.Integer, primary_key=True)
     fechacompra = db.Column(db.DateTime, nullable=False)
     retirado = db.Column(db.Boolean, nullable=False)
@@ -26,6 +27,7 @@ class Compra(db.Model):
 
     @staticmethod
     def from_json(compra_json):
+
         id = compra_json.get('id')
         fechacompra = datetime.strptime(compra_json.get('fechacompra'), '%Y-%m-%d')
         retirado = compra_json.get('retirado')
@@ -37,4 +39,3 @@ class Compra(db.Model):
                       bolsonid=bolsonid,
                       clienteid=clienteid
                       )
-

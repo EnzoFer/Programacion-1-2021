@@ -1,40 +1,60 @@
 from flask_restful import Resource
-from flask import request
-# from main.models import CompraModel
-
-COMPRAS = {
-    1: {'primer compra': 'Primer compra'},
-    2: {'segunda compra': 'Segunda compra'}
-}
+from flask import request, jsonify
+from .. import db
+from main.models import CompraModels
 
 
 class Compras(Resource):
     def get(self):
-        return COMPRAS
+        page = 1
+        per_page = 10
+        compras = db.session.query(CompraModels)
+        if request.get_json():
+            filtro = request.get_json().items()
+            for key, value in filtro:
+                if key == "page":
+                    page = int(value)
+                if key == "per_page":
+                    per_page = int(value)
+        compras = compras.paginate(page, per_page, True, 30)
+        return jsonify({'clientes': [compra.to_json() for compra in compras.items],
+                        'total': compras.total,
+                        'page': compras.page,
+                        'pages': compras.pages
+                        })
 
     def post(self):
-        compra = request.get_json()
-        id = int(max(COMPRAS.keys())) + 1
-        COMPRAS[id] = compra
-        return COMPRAS[id], 201
+        compra = CompraModels.from_json(request.get_json())
+        try:
+            db.session.add(compra)
+            db.session.commit()
+            return compra.to_json(), 201
+        except:
+            return '', 404
 
 
 class Compra(Resource):
     def get(self, id):
-        if int(id) in COMPRAS:
-            return COMPRAS[int(id)]
-        return "", 404
+        compra = db.session.query(CompraModels).get_or_404(id)
+        return compra.to_json()
 
     def delete(self, id):
-        if int(id) in COMPRAS:
-            del COMPRAS[int(id)]
+        compra = db.session.query(CompraModels).get_or_404(id)
+        try:
+            db.session.delete(compra)
+            db.session.commit()
             return '', 204
-        return '', 404
+        except:
+            return '', 404
 
     def put(self, id):
-        if int(id) in COMPRAS:
-            compra = COMPRAS[int(id)]
-            date = request.get_json()
-            compra.update(date)
-            return compra, 201
-        return '', 404
+        compra = db.session.query(CompraModels).get_or_404(id)
+        data = request.get_json().items()
+        for key, value in data:
+            setattr(compra, key, value)
+        try:
+            db.session.add(compra)
+            db.session.commit()
+            return compra.to_json(), 201
+        except:
+            return '', 404
