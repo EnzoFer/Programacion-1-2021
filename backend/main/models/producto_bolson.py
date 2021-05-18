@@ -10,6 +10,7 @@ class ProductoBolson(db.Model):
     bolson = db.relationship('Bolson', back_populates="productosbolsones", uselist=False, single_parent=True)
 
     def __repr__(self):
+
         return '<Producto Bolsones: %r %r %r >' % (self.id, self.producto.to_json(), self.bolson.to_json())
 
     def to_json(self):
@@ -23,7 +24,6 @@ class ProductoBolson(db.Model):
 
     @staticmethod
     def from_json(producto_json):
-        
         id = producto_json.get('id')
         productoId = producto_json.get('productoId')
         bolson = producto_json.get('bolson')

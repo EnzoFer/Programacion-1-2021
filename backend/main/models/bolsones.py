@@ -12,6 +12,7 @@ class Bolson(db.Model):
     productosbolsones = db.relationship("ProductoBolson", back_populates="bolson", cascade="all, delete-orphan")
 
     def _repr_(self):
+
         return '<Bolson: %r %r %r >' % (self.nombre, self.aprobado, self.fecha)
 
     def to_json(self):
@@ -26,7 +27,6 @@ class Bolson(db.Model):
 
     @staticmethod
     def from_json(bolson_json):
-
         id = bolson_json.get('id')
         nombre = bolson_json.get('nombre')
         fecha = datetime.strptime(bolson_json.get('fecha'), '%Y-%m-%d')

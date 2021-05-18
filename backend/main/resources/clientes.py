@@ -1,14 +1,17 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from main.models import ClienteModels
+from main.models import UsuarioModels
+from main.auth.Decorators import admin_required
+from flask_jwt_extended import jwt_required
 
 
 class Clientes(Resource):
+    @jwt_required()
     def get(self):
         page = 1
         per_page = 10
-        clientes = db.session.query(ClienteModels)
+        clientes = db.session.query(UsuarioModels)
         if request.get_json():
             filtro = request.get_json().items()
             for key, value in filtro:
@@ -23,8 +26,9 @@ class Clientes(Resource):
                         'pages': clientes.pages
                         })
 
+    @jwt_required()
     def post(self):
-        cliente = ClienteModels.from_json(request.get_json())
+        cliente = UsuarioModels.from_json(request.get_json())
         try:
             db.session.add(cliente)
             db.session.commit()
@@ -34,12 +38,14 @@ class Clientes(Resource):
 
 
 class Cliente(Resource):
+    @jwt_required()
     def get(self, id):
-        cliente = db.session.query(ClienteModels).get_or_404(id)
+        cliente = db.session.query(UsuarioModels).get_or_404(id)
         return cliente.to_json()
 
+    @admin_required
     def delete(self, id):
-        cliente = db.session.query(ClienteModels).get_or_404(id)
+        cliente = db.session.query(UsuarioModels).get_or_404(id)
         try:
             db.session.delete(cliente)
             db.session.commit()
@@ -47,8 +53,9 @@ class Cliente(Resource):
         except:
             return '', 404
 
+    @jwt_required()
     def put(self, id):
-        cliente = db.session.query(ClienteModels).get_or_404(id)
+        cliente = db.session.query(UsuarioModels).get_or_404(id)
         data = request.get_json().items()
         for key, value in data:
             setattr(cliente, key, value)
